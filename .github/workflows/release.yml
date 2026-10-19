@@ -1,0 +1,49 @@
+name: Prepare release
+
+on:
+  push:
+    branches: [main]
+    paths: [blender_manifest.toml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prepare-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read release version
+        id: version
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import tomllib
+          from pathlib import Path
+          manifest = tomllib.loads(Path('blender_manifest.toml').read_text())
+          print(f"tag=v{manifest['version']}")
+          PY
+
+      - name: Build installable ZIP
+        run: python3 build_release.py
+
+      - name: Prepare draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "Release $TAG already exists; leaving it unchanged. Bump the version for another release."
+            exit 0
+          fi
+          gh release create "$TAG" dist/*.zip \
+            --target "$GITHUB_SHA" \
+            --title "$TAG" \
+            --draft \
+            --generate-notes
