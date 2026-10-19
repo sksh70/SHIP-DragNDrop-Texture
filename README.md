@@ -36,7 +36,7 @@ The addon's "Smart Apply" feature works by identifying a **base name** from the 
 
 ## Installation
 
-1.  Download the packaged add-on ZIP from [**Releases**](https://github.com/shipworkshop/SHIP-DragNDrop-Texture/releases), or build it from this checkout with `python build_release.py`. The local package is written to `dist/ship_dragndrop_texture-1.1.1.zip`.
+1.  Download the packaged add-on ZIP from [**Releases**](https://github.com/sksh70/SHIP-DragNDrop-Texture/releases), or build it from this checkout with `python build_release.py`. The local package is written to `dist/ship_dragndrop_texture-1.1.1.zip`.
 2.  In Blender 4.2, go to `Edit` > `Preferences` > `Add-ons`, open the dropdown menu at the top right, and choose `Install from Disk...`.
 3.  Select the packaged ZIP, then enable **SHIP Drag and Drop Texture** (version **1.1.1**).
 
