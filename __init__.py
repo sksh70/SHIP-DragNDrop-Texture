@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Smart Drag & Drop Texture Set",
     "author": "Yurii Konoplov, Gemini",
-    "version": (1, 1, 0),  # Version updated for localization
+    "version": (1, 1, 1),
     "blender": (4, 1, 0),
     "location": "3D Viewport & F9 Panel",
     "description": "Drag and drop a texture onto an object. The addon will automatically find the texture set (Normal, Roughness, etc.) or allow you to manually assign a single texture via the F9 panel.",
@@ -14,7 +14,7 @@ import bpy
 import os
 from bpy_extras.view3d_utils import region_2d_to_vector_3d, region_2d_to_origin_3d
 
-IMAGE_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.tga')
+IMAGE_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.tga', '.dds')
 
 SUFFIX_MAP = {
     "_normal": "Normal", "_nrm": "Normal", "_normalgl": "Normal",

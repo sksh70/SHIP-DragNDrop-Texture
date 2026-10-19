@@ -11,6 +11,7 @@ A simple yet powerful Blender addon that streamlines the material creation proce
 ## Key Features
 
 *   **Drag & Drop Workflow:** Simply drag a texture file from your explorer onto any object in the 3D Viewport.
+*   **Supported Formats:** PNG, JPG/JPEG, BMP, TIFF, TGA, and DDS (including `.dds` and `.DDS`) for drag and drop and automatic texture-set discovery. DDS files use Blender's native image loader.
 *   **Automatic PBR Set Detection:** Intelligently finds and connects maps for Base Color, Metallic, Roughness, and Normals based on filename suffixes.
 *   **Two Modes of Operation:**
     1.  **Smart Apply (Default):** Finds and applies the entire texture set automatically.
@@ -35,12 +36,15 @@ The addon's "Smart Apply" feature works by identifying a **base name** from the 
 
 ## Installation
 
-1.  Go to the [**Releases**](https://github.com/shipworkshop/SHIP-DragNDrop-Texture/releases) page.
-2.  Download the latest `SHIP-DragNDrop-Texture-main.zip` file.
-3.  In Blender, go to `Edit` > `Preferences` > `Add-ons`.
-4.  Click `Install...` and select the downloaded `.zip` file.
-5.  Enable the "Smart Drag & Drop" addon by checking the box.
-Or just Drag & Drop zip to your Blender window!
+1.  Download the packaged add-on ZIP from [**Releases**](https://github.com/shipworkshop/SHIP-DragNDrop-Texture/releases), or build it from this checkout with `python build_release.py`. The local package is written to `dist/ship_dragndrop_texture-1.1.1.zip`.
+2.  In Blender 4.2, go to `Edit` > `Preferences` > `Add-ons`, open the dropdown menu at the top right, and choose `Install from Disk...`.
+3.  Select the packaged ZIP, then enable **SHIP Drag and Drop Texture** (version **1.1.1**).
+
+Install the ZIP, rather than selecting `__init__.py` by itself. That filename is the entry point of a package and is not discovered as a standalone add-on. After replacing an older installation, restart Blender so its registered file handlers are refreshed.
+
+## Preparing a Release
+
+Update the version in both `blender_manifest.toml` and `bl_info` in `__init__.py`. When the manifest change reaches `main`, GitHub Actions builds the installable ZIP and attaches it to a draft release. Review the draft under Releases and click Publish; no manual ZIP upload is needed. Enable Actions in your fork if prompted. You can also run **Prepare release** manually from the Actions tab. Existing releases are left unchanged, so use a new version for each release.
 
 ## Usage
 
